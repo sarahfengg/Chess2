@@ -6,6 +6,10 @@ import javafx.scene.image.ImageView;
 
 public class Pawn extends Piece{
     private ImageView imageView;
+    @Override
+    public TeamColor getTeamColor(){
+        return this.teamColor;
+    }
 
     public Pawn(TeamColor color) {
         this.teamColor = color;
@@ -26,5 +30,11 @@ public class Pawn extends Piece{
     @Override
     public ImageView getImageView() {
         return imageView;
+    }
+
+    @Override
+    public boolean canMove(Piece[][] board,int currantX, int currantY, int targetX, int targetY) {
+        return true;
+
     }
 }

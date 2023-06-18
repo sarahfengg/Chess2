@@ -4,8 +4,13 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Rook extends Piece{
+public class Rook extends Piece {
     private ImageView imageView;
+
+    @Override
+    public TeamColor getTeamColor() {
+        return this.teamColor;
+    }
 
     public Rook(TeamColor color) {
         this.teamColor = color;
@@ -14,10 +19,10 @@ public class Rook extends Piece{
         ImageView pieceView = new ImageView(piece);
         this.imageView = pieceView;
         Rectangle2D viewRect;
-        if(this.teamColor == TeamColor.WHITE) {
-            viewRect = new Rectangle2D( 400, 0, 100, 100);
+        if (this.teamColor == TeamColor.WHITE) {
+            viewRect = new Rectangle2D(400, 0, 100, 100);
         } else {
-            viewRect = new Rectangle2D( 400, 100, 100, 100);
+            viewRect = new Rectangle2D(400, 100, 100, 100);
         }
         pieceView.setViewport(viewRect);
     }
@@ -28,5 +33,45 @@ public class Rook extends Piece{
         return imageView;
     }
 
+    @Override
+    public boolean canMove(Piece[][] board, int currentX, int currentY, int targetX, int targetY) {
+        if (currentX != targetX && currentY != targetY) {
+            return false;
+        }
+        if (targetX > targetY) {
+            int x = currentX + 1;
+            while (x < targetX) {
+                if (board[currentY][x] != null){
+                    return false;
+                }
+                x++;
+            }
 
+        } else if (targetY > currentY) {
+            int y = currentY + 1;
+            while(y < targetY){
+                if(board[y][currentX] != null){
+                    return false;
+                }
+            }
+        } else if (currentX > targetX) {
+            int x = currentX - 1;
+            while (x > targetX) {
+                if (board[currentY][x] != null){
+                    return false;
+                }
+                x--;
+            }
+
+        } else if (currentY > targetY) {
+            int y = currentY - 1;
+            while (y > targetY) {
+                if (board[y][currentX] != null){
+                    return false;
+                }
+                y--;
+            }
+        }
+        return true;
+    }
 }

@@ -2,6 +2,8 @@ package game;
 
 import game.pieces.*;
 
+import java.util.Scanner;
+
 public class Board {
     private Piece[][] boardArray = new Piece[8][8];
 
@@ -37,6 +39,8 @@ public class Board {
         }
 
     }
+
+
 
     public Piece[][] getBoardArray() {
         return boardArray;
